@@ -5,7 +5,7 @@
  *********************************************************************/
 
 #include "lrs.h"
-
+#include "noc_packet.c"
 #define RelayQueryConnectionRequest 0
 #define RelayRegisterRequest 		2
 #define RelayMsgConnectionRequest 	4
@@ -18,7 +18,7 @@ char bgw_host_id[] = {0x0a,0x00,0xa8,0xc0};
 vuser_init()
 {
 
-	int length ,i ;
+	int length ,i ,res = 0 ;
 	char *null;
 	char *data;
 /*
@@ -36,227 +36,58 @@ vuser_init()
 
 	//-------------------------------------L1-------------------------------------------------
 	//bgw_RelayRegiRequest
+	lr_message("-------------------------------------L1 : bgw_RelayRegiRequest-----------------------------------------------");
 	send_data(fgw_host_id, null,RelayRegisterRequest, "bgw_RelayRegiRequest");//bgw_RelayRegiRequest
 	lrs_send("relay-bgw", "bgw_RelayRegiRequest" , LrsLastArg);
-	get_receive("relay-bgw", "buf1", LrsLastArg);
-
+	res = Noc_get_receive("relay-bgw", "buf1", RelayRegisterRequest);
+	if (0 != res ) {
+		lr_error_message("bgw_RelayRegiRequest is err");
+		return res;
+	}
 
 	
 	//fgw_RelayQueryConnectionRequest
+	lr_message("-------------------------------------L1 : fgw_RelayQueryConnectionRequest-----------------------------------------------");
 	send_data(bgw_host_id,fgw_host_id,RelayQueryConnectionRequest, "fgw_RelayQueryConnectionRe");//RelayQueryConnectionRequest
 	lrs_send("relay-fgw", "fgw_RelayQueryConnectionRe" , LrsLastArg);
-	get_receive("relay-fgw", "buf1", LrsLastArg);
+	res = Noc_get_receive("relay-fgw", "buf1", RelayQueryConnectionRequest);
+	if (0 != res ) {
+		lr_error_message("fgw_RelayQueryConnectionRequest is err");
+		return res;
+	}
 
 	//fgw_RelayRegiRequest
+	lr_message("-------------------------------------L1 : fgw_RelayRegiRequest-----------------------------------------------");
 	send_data(bgw_host_id, null,RelayRegisterRequest, "fgw_RelayRegiRequest");//RelayRegiRequest
 	lrs_send("relay-fgw", "fgw_RelayRegiRequest" , LrsLastArg);
-    get_receive("relay-fgw", "buf1", LrsLastArg);
+    res = Noc_get_receive("relay-fgw","buf1",RelayRegisterRequest);
+	if (0 != res ) {
+		lr_error_message("fgw_RelayRegiRequest is err");
+		return res;
+	}
 
 	//-------------------------------------L2-------------------------------------------------
 	//fgw_RelayMsgConnectionRequest
 	// L2  0100000a -> 0a00a8c0 fgw_host_id ->bgw_host_id
+	lr_message("-------------------------------------L2 : fgw_RelayMsgConnectionRequest-----------------------------------------------");
 	send_data(fgw_host_id, bgw_host_id,RelayMsgConnectionRequest, "fgw_RelayMsgConnectionReq");//RelayRegiRequest
 	lrs_send("relay-fgw", "fgw_RelayMsgConnectionReq" , LrsLastArg);
-    get_receive("relay-bgw", "buf_RelayMsgConnectionReq", LrsLastArg);
-
+    res = Noc_get_receive("relay-bgw", "buf_RelayMsgConnectionReq", RelayMsgConnectionRequest);
+	if (0 != res ) {
+		lr_error_message("L2 :: fgw_RelayMsgConnectionRequest is err");
+		return res;
+	}
 	//bgw_RelayMsgConnectionResponse
 	//L2 0a00a8c0 -> 0100000a bgw_host_id ->fgw_host_id
+	lr_message("-------------------------------------L2 : bgw_RelayMsgConnectionResponse-----------------------------------------------");
 	send_data(bgw_host_id,fgw_host_id,RelayMsgConnectionResponse, "bgw_RelayMsgConnectionRes");//bgw_RelayMsgConnectionRes
 	lrs_send("relay-bgw", "bgw_RelayMsgConnectionRes" , LrsLastArg);
-    get_receive("relay-fgw", "buf_RelayMsgConnectionRes", LrsLastArg);
-
-
-
-    return 0;
-}
-/***************************
-默认使用的协议文件内容，此位置可以扩展为testcase
-*****************************/
-enum NocRelayVersion
-{
-  NOC_RELAY_VER_01 = 0,
-  NOC_RELAY_VER_MAX
-};
-/******************************************************************************************/
-//处理返回报文内容
-//参数:sock 为socket number
-//     buf 要处理的buffer name
-// ************************************************************************************
-void get_receive(char *sock, char *buf)
-{	
-	char *recvbuf;
-	char *reclen;	
-	int i,recvlen= 0;
-
-    //lrs_set_recv_timeout(600,0);//设置超时时间300s
-	//返回包长度
-	lrs_receive_ex(sock,buf, "NumberOfBytesToRecv=4", LrsLastArg);//返回包头中的长度位置
-	lrs_get_last_received_buffer(sock,&recvbuf,&recvlen); //获得报文内容
-	lr_output_message("$$$$$$$$$$$$$$$$$$$$$$$$$$$$ len is %x %x %x %x", recvbuf[0],recvbuf[1],recvbuf[2],recvbuf[3]);
-	if(0x00 == recvbuf[2]) 
-		recvlen = recvbuf[3];
-	else {
-		//高字节未处理
-		;
-	}
-	lr_output_message("len is %d", recvlen);
-
-	//接受返回包
-	lr_save_int(recvlen,"recvlen");
-	reclen = lr_eval_string("NumberOfBytesToRecv=<recvlen>");
-	lrs_receive_ex(sock,buf,reclen, LrsLastArg); //返回指定长度的报文
-	lrs_get_last_received_buffer(sock,&recvbuf,&recvlen); //获得报文内容
-	
-	for (i=0 ; i <recvlen; i++) {
-		lr_output_message("receive[%d] is %x",i, recvbuf[i]);
+    res = Noc_get_receive("relay-fgw", "buf_RelayMsgConnectionRes", RelayMsgConnectionResponse);
+	if (0 != res ) {
+		lr_error_message("L2 :: bgw_RelayMsgConnectionResponse is err");
+		return res;
 	}
 
-};
-/****************************************************
-//msg_ty :Xgw_RelayRegisterRequest  [2]
-//参数:
-	host_id 发送方的host_id
-	len 发送数据长度
-	param_name 发送数据
-******************************************************/
-void gw_RelayRegisterRequest(char host_id[],int *index,char des[])
-{
-	int i = 0;
-	int j = *index;
-	//msg_type
-	des[j++] = 0x02;
-
-	//length
-	des[j++] =0x00;
-	des[j++] =0x04;
-
-	for (;i < 4;) {
-		des[j++] = host_id[i++];
-	}
-	*index = j;
+    return res;
 }
 
-/****************************************************
-//host_target
-//参数:
-	host_id 发送方的host_id
-	target_host_id 为接受方的host_id
-	len 发送数据长度
-	param_name 发送数据
-******************************************************/
-void host_target(char host_id[],char target_host_id[],int *index,char des[])
-{
-	int i = *index;
-	int j = *index;
-	for(;i < j + 4; i++){
-		des[i] = host_id[i - j];
-		des[i + 4] = target_host_id[i - j];
-	}
-	j = j + 8;
-	*index = j;
-
-}
-/****************************************************
-//发送数据封包
-//参数:
-	host_id 发送方的host_id
-	msg_ty 发送数据的类型 RelayRegiRequest 
-	param_name 发送数据位置
-******************************************************/
-void send_data(char host_id[],char target_host_id[],int msg_ty,char param_name[])
-{
-	int length ,i , index = 0;
-	int *size ;
-	//version 
-	char version = 0X00;
-	//msg_type
-	char msg_type;
-	//length_c
-	char c_length[2];
-	char des[299];
-	char L2_data[20] = {"1"}; //L2 send_data
-
-	des[index++] = version;
-
-	/*****************************************************************
-	#define RelayQueryConnectionRequest 	0
-	#define RelayRegisterRequest 			2
-	#define RelayMsgConnectionRequest 	4
-	#define RelayMsgConnectionResponse    5
-	#define RelayDataIndication			6
-	*****************************************************************/
-	if( RelayRegisterRequest == msg_ty ){
-		  size = &index;
-		gw_RelayRegisterRequest(host_id, size, des );
-	}
-	if( RelayQueryConnectionRequest == msg_ty ){
-		des[index++] = 0x00;
-		length = sizeof(host_id) + sizeof(target_host_id);
-		if (length < 256) {
-			des[index++] = 0x00;
-			des[index++] = length;
-		}
-		else{
-			//高字节位移未处理
-			;
-		}
-		size = &index;
-		host_target(host_id ,target_host_id, size,des );
-
-	}
-	if (RelayMsgConnectionRequest == msg_ty) {
-		des[index++] = 0x04;
-		length = sizeof(host_id) + sizeof(target_host_id);
-		if (length < 256) {
-			des[index++] = 0x00;
-			des[index++] = length;
-		}
-		else{
-			//高字节位移未处理
-			;
-		}
-		size = &index;
-		host_target(host_id ,target_host_id, size,des );
-	}
-	if (RelayMsgConnectionResponse == msg_ty) {
-		des[index++] = 0x05;
-		length = sizeof(host_id) + sizeof(target_host_id);
-		if (length < 256) {
-			des[index++] = 0x00;
-			des[index++] = length;
-		}
-		else{
-			//高字节位移未处理
-			;
-		}
-		size = &index;
-		host_target(host_id ,target_host_id, size,des );
-	}
-	if( RelayDataIndication == msg_ty){
-		//RelayDataIndication
-		;
-		des[index++] = 0x06;
-		length = sizeof(host_id) + sizeof(target_host_id) + sizeof(L2_data);
-		if (length < 256) {
-			des[index++] = 0x00;
-			des[index++] = length;
-		}
-		else{
-			//高字节位移未处理
-			;
-		}
-		size = &index;
-		host_target(host_id ,target_host_id, size,des );
-		for (i=0;i<sizeof(L2_data);) {
-			des[index++] = L2_data[i++];
-		}
-	}
-
-    //lr_output_message ("des is %X, index is %d, *size is %d",des, index, *size);
-	//for (i=0;i<index;i++) {
-	//	lr_output_message ("[%d] is %x", i, des[i]);
-	//}
-
-    lrs_save_param_ex("relay-bgw", "user", des, 0, index ,"ascii", param_name); //存储发送字符串
-	
-}
