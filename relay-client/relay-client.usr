@@ -1,6 +1,6 @@
 [General]
 Type=WinSock
-RecordedProtocol=NoAvailableInfo
+RecordedProtocol=
 DefaultCfg=default.cfg
 AppName=
 BuildTarget=
@@ -9,13 +9,12 @@ ParamLeftBrace=<
 NewFunctionHeader=0
 LastActiveAction=vuser_init
 CorrInfoReportDir=result1
-LastResultDir=result1
+LastResultDir=
 DevelopTool=Vugen
 MajorVersion=11
 MinorVersion=0
-ParameterFile=gw.prm
+ParameterFile=
 GlobalParameterFile=
-RunType=cci
 LastModifyVer=11.0.0.0
 [TransactionsOrder]
 Order=""
@@ -30,7 +29,7 @@ Default Profile=default.usp
 [StateManagement]
 1=1
 7=0
-8=1
+8=0
 9=0
 10=0
 11=0
@@ -39,26 +38,20 @@ Default Profile=default.usp
 18=0
 20=0
 21=0
-CurrentState=8
-VuserStateHistory= 0 65536 65537 65552 1048576 1048592
+CurrentState=1
+VuserStateHistory= 0 65536 65552
 LastReplayStatus=2
-LastReplayErrorID1=9011
-LastReplayErrorMsg1=vuser_init.c(54): Error : Specified buffer fgw_RelayRegisterRequest doesn't exist. Error code : 9011.
 [ExtraFiles]
 data.ws=
 [Recorded Actions]
 vuser_init=0
-Action=1
+Action=0
 vuser_end=0
 [Replayed Actions]
 vuser_init=1
 Action=1
 vuser_end=1
 [Modified Actions]
-vuser_init=1
+vuser_init=0
 Action=1
-vuser_end=1
-[Interpreters]
-vuser_init=cci
-Action=cci
-vuser_end=cci
+vuser_end=0

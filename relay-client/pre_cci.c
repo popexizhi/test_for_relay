@@ -1,4 +1,4 @@
-# 1 "g:\\pc\\work\\relay\\script\\gw\\\\combined_gw.c"
+# 1 "g:\\pc\\work\\relay\\script\\test_for_relay\\relay-client\\\\combined_relay-client.c"
 # 1 "D:\\Program Files (x86)\\HP\\LoadRunner\\include/lrun.h" 1
  
  
@@ -822,7 +822,7 @@ int lr_convert_string_encoding(char *sourceString, char *fromEncoding, char *toE
 
 
 
-# 1 "g:\\pc\\work\\relay\\script\\gw\\\\combined_gw.c" 2
+# 1 "g:\\pc\\work\\relay\\script\\test_for_relay\\relay-client\\\\combined_relay-client.c" 2
 
 # 1 "vuser_init.c" 1
  
@@ -1146,13 +1146,14 @@ int		LrsExcludeSocket(char* s_desc);
 
 
 
+
+char fgw_host_id[] = {0x01,0x00,0x00,0x0a}; 
+char bgw_host_id[] = {0x0a,0x00,0xa8,0xc0};
+
 vuser_init()
 {
 
 	int length ,i ;
-
-	char fgw_host_id[] = {0x01,0x00,0x00,0x0a}; 
-	char bgw_host_id[] = {0x0a,0x00,0xa8,0xc0};
 	char *null;
 	char *data;
  
@@ -1164,8 +1165,6 @@ vuser_init()
 
 
 	
-	
-
 
     LrsCreateSocket("relay-bgw", "TCP", "RemoteHost=192.168.1.99:12200",  "0");
 	LrsCreateSocket("relay-fgw", "TCP", "RemoteHost=192.168.1.99:12200",  "0");
@@ -1203,13 +1202,7 @@ vuser_init()
     LrsReceive("relay-fgw", "buf_RelayMsgConnectionRes", "0");
 
 
-	 
-	for (i=0;i<1000;i++) {
-	send_data(fgw_host_id,bgw_host_id,6, "fgw_RelayDataIndication");
-	LrsSend("relay-fgw", "fgw_RelayDataIndication" , "0");
-    LrsReceive("relay-bgw", "buf_RelayDataIndication", "0");
 
-	}
     return 0;
 }
  
@@ -1370,7 +1363,7 @@ void send_data(char host_id[],char target_host_id[],int msg_ty,char param_name[]
     LrsSaveParamEx("relay-bgw", "user", des, 0, index ,"ascii", param_name);  
 	
 }
-# 2 "g:\\pc\\work\\relay\\script\\gw\\\\combined_gw.c" 2
+# 2 "g:\\pc\\work\\relay\\script\\test_for_relay\\relay-client\\\\combined_relay-client.c" 2
 
 # 1 "Action.c" 1
  
@@ -1383,36 +1376,29 @@ void send_data(char host_id[],char target_host_id[],int msg_ty,char param_name[]
 
 Action()
 {
+	int i;
+	 
+	for (i=0;i<1000;i++) {
+	send_data(fgw_host_id,bgw_host_id,6, "fgw_RelayDataIndication");
+	LrsSend("relay-fgw", "fgw_RelayDataIndication" , "0");
+    LrsReceive("relay-bgw", "buf_RelayDataIndication", "0");
+
+	}
     return 0;
 }
 
-# 3 "g:\\pc\\work\\relay\\script\\gw\\\\combined_gw.c" 2
+# 3 "g:\\pc\\work\\relay\\script\\test_for_relay\\relay-client\\\\combined_relay-client.c" 2
 
 # 1 "vuser_end.c" 1
- 
-
-
-
-
-
 
 
 
 vuser_end()
 {
-	
-
-	LrsSend("socket0", "buf16", "0");
-
-    LrsReceive("socket0", "buf17", "0");
-
-    LrsDisableSocket("socket0", 2);
-
-    LrsCloseSocket("socket0");
     LrsCleanup();
 
     return 0;
 }
 
-# 4 "g:\\pc\\work\\relay\\script\\gw\\\\combined_gw.c" 2
+# 4 "g:\\pc\\work\\relay\\script\\test_for_relay\\relay-client\\\\combined_relay-client.c" 2
 

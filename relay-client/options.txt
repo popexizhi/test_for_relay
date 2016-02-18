@@ -1,0 +1,9 @@
+-+
+-DCCI
+-D_IDA_XL
+-DWINNT
+-IG:\pc\work\relay\script\test_for_relay\relay-client
+-ID:\Program Files (x86)\HP\LoadRunner\include
+-eg:\pc\work\relay\script\test_for_relay\relay-client\\logfile.log
+g:\pc\work\relay\script\test_for_relay\relay-client\\combined_relay-client.c
+g:\pc\work\relay\script\test_for_relay\relay-client\\pre_cci.c
