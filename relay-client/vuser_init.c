@@ -30,7 +30,6 @@ vuser_init()
 	char fgw_RelayDataIndication[] = {0x00,0x06,0x00,0x0a,0x01,0x00,0x00,0x0a,0x0a,0x00,0xa8,0xc0,0x11,0x11}; //data  0100000a -> 0a00a8c0
 */
 	
-
     lrs_create_socket("relay-bgw", "TCP", "RemoteHost=192.168.1.99:12200",  LrsLastArg);
 	lrs_create_socket("relay-fgw", "TCP", "RemoteHost=192.168.1.99:12200",  LrsLastArg);
 
@@ -39,32 +38,32 @@ vuser_init()
 	//bgw_RelayRegiRequest
 	send_data(fgw_host_id, null,RelayRegisterRequest, "bgw_RelayRegiRequest");//bgw_RelayRegiRequest
 	lrs_send("relay-bgw", "bgw_RelayRegiRequest" , LrsLastArg);
-    lrs_receive("relay-bgw", "buf1", LrsLastArg);
+	get_receive("relay-bgw", "buf1", LrsLastArg);
 
 
 	
 	//fgw_RelayQueryConnectionRequest
 	send_data(bgw_host_id,fgw_host_id,RelayQueryConnectionRequest, "fgw_RelayQueryConnectionRe");//RelayQueryConnectionRequest
 	lrs_send("relay-fgw", "fgw_RelayQueryConnectionRe" , LrsLastArg);
-    lrs_receive("relay-fgw", "buf2", LrsLastArg);
+	get_receive("relay-fgw", "buf1", LrsLastArg);
 
 	//fgw_RelayRegiRequest
 	send_data(bgw_host_id, null,RelayRegisterRequest, "fgw_RelayRegiRequest");//RelayRegiRequest
 	lrs_send("relay-fgw", "fgw_RelayRegiRequest" , LrsLastArg);
-    lrs_receive("relay-fgw", "buf1", LrsLastArg);
+    get_receive("relay-fgw", "buf1", LrsLastArg);
 
 	//-------------------------------------L2-------------------------------------------------
 	//fgw_RelayMsgConnectionRequest
 	// L2  0100000a -> 0a00a8c0 fgw_host_id ->bgw_host_id
 	send_data(fgw_host_id, bgw_host_id,RelayMsgConnectionRequest, "fgw_RelayMsgConnectionReq");//RelayRegiRequest
 	lrs_send("relay-fgw", "fgw_RelayMsgConnectionReq" , LrsLastArg);
-    lrs_receive("relay-bgw", "buf_RelayMsgConnectionReq", LrsLastArg);
+    get_receive("relay-bgw", "buf_RelayMsgConnectionReq", LrsLastArg);
 
 	//bgw_RelayMsgConnectionResponse
 	//L2 0a00a8c0 -> 0100000a bgw_host_id ->fgw_host_id
 	send_data(bgw_host_id,fgw_host_id,RelayMsgConnectionResponse, "bgw_RelayMsgConnectionRes");//bgw_RelayMsgConnectionRes
 	lrs_send("relay-bgw", "bgw_RelayMsgConnectionRes" , LrsLastArg);
-    lrs_receive("relay-fgw", "buf_RelayMsgConnectionRes", LrsLastArg);
+    get_receive("relay-fgw", "buf_RelayMsgConnectionRes", LrsLastArg);
 
 
 
@@ -78,8 +77,41 @@ enum NocRelayVersion
   NOC_RELAY_VER_01 = 0,
   NOC_RELAY_VER_MAX
 };
+/******************************************************************************************/
+//处理返回报文内容
+//参数:sock 为socket number
+//     buf 要处理的buffer name
+// ************************************************************************************
+void get_receive(char *sock, char *buf)
+{	
+	char *recvbuf;
+	char *reclen;	
+	int i,recvlen= 0;
 
+    //lrs_set_recv_timeout(600,0);//设置超时时间300s
+	//返回包长度
+	lrs_receive_ex(sock,buf, "NumberOfBytesToRecv=4", LrsLastArg);//返回包头中的长度位置
+	lrs_get_last_received_buffer(sock,&recvbuf,&recvlen); //获得报文内容
+	lr_output_message("$$$$$$$$$$$$$$$$$$$$$$$$$$$$ len is %x %x %x %x", recvbuf[0],recvbuf[1],recvbuf[2],recvbuf[3]);
+	if(0x00 == recvbuf[2]) 
+		recvlen = recvbuf[3];
+	else {
+		//高字节未处理
+		;
+	}
+	lr_output_message("len is %d", recvlen);
 
+	//接受返回包
+	lr_save_int(recvlen,"recvlen");
+	reclen = lr_eval_string("NumberOfBytesToRecv=<recvlen>");
+	lrs_receive_ex(sock,buf,reclen, LrsLastArg); //返回指定长度的报文
+	lrs_get_last_received_buffer(sock,&recvbuf,&recvlen); //获得报文内容
+	
+	for (i=0 ; i <recvlen; i++) {
+		lr_output_message("receive[%d] is %x",i, recvbuf[i]);
+	}
+
+};
 /****************************************************
 //msg_ty :Xgw_RelayRegisterRequest  [2]
 //参数:
@@ -146,13 +178,13 @@ void send_data(char host_id[],char target_host_id[],int msg_ty,char param_name[]
 
 	des[index++] = version;
 
-/*****************************************************************
-#define RelayQueryConnectionRequest 	0
-#define RelayRegisterRequest 			2
-#define RelayMsgConnectionRequest 	4
-#define RelayMsgConnectionResponse    5
-#define RelayDataIndication			6
-*****************************************************************/
+	/*****************************************************************
+	#define RelayQueryConnectionRequest 	0
+	#define RelayRegisterRequest 			2
+	#define RelayMsgConnectionRequest 	4
+	#define RelayMsgConnectionResponse    5
+	#define RelayDataIndication			6
+	*****************************************************************/
 	if( RelayRegisterRequest == msg_ty ){
 		  size = &index;
 		gw_RelayRegisterRequest(host_id, size, des );
@@ -220,10 +252,10 @@ void send_data(char host_id[],char target_host_id[],int msg_ty,char param_name[]
 		}
 	}
 
-    lr_output_message ("des is %X, index is %d, *size is %d",des, index, *size);
-	for (i=0;i<index;i++) {
-		lr_output_message ("[%d] is %x", i, des[i]);
-	}
+    //lr_output_message ("des is %X, index is %d, *size is %d",des, index, *size);
+	//for (i=0;i<index;i++) {
+	//	lr_output_message ("[%d] is %x", i, des[i]);
+	//}
 
     lrs_save_param_ex("relay-bgw", "user", des, 0, index ,"ascii", param_name); //存储发送字符串
 	
