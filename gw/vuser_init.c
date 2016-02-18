@@ -11,13 +11,14 @@
 #define RelayMsgConnectionRequest 	4
 #define RelayMsgConnectionResponse  5
 #define RelayDataIndication 		6
+
+char fgw_host_id[] = {0x01,0x00,0x00,0x0a}; 
+char bgw_host_id[] = {0x0a,0x00,0xa8,0xc0};
+
 vuser_init()
 {
 
 	int length ,i ;
-
-	char fgw_host_id[] = {0x01,0x00,0x00,0x0a}; 
-	char bgw_host_id[] = {0x0a,0x00,0xa8,0xc0};
 	char *null;
 	char *data;
 /*
@@ -29,8 +30,6 @@ vuser_init()
 	char fgw_RelayDataIndication[] = {0x00,0x06,0x00,0x0a,0x01,0x00,0x00,0x0a,0x0a,0x00,0xa8,0xc0,0x11,0x11}; //data  0100000a -> 0a00a8c0
 */
 	
-	
-
 
     lrs_create_socket("relay-bgw", "TCP", "RemoteHost=192.168.1.99:12200",  LrsLastArg);
 	lrs_create_socket("relay-fgw", "TCP", "RemoteHost=192.168.1.99:12200",  LrsLastArg);
@@ -68,13 +67,7 @@ vuser_init()
     lrs_receive("relay-fgw", "buf_RelayMsgConnectionRes", LrsLastArg);
 
 
-	//fgw_RelayDataIndication ------------------------data------------------------------------------
-	for (i=0;i<1000;i++) {
-	send_data(fgw_host_id,bgw_host_id,RelayDataIndication, "fgw_RelayDataIndication");
-	lrs_send("relay-fgw", "fgw_RelayDataIndication" , LrsLastArg);
-    lrs_receive("relay-bgw", "buf_RelayDataIndication", LrsLastArg);
 
-	}
     return 0;
 }
 /***************************
