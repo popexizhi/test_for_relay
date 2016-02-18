@@ -1,0 +1,132 @@
+Virtual User Script started at : 2016-02-18 10:58:34
+Starting action vuser_init.
+vuser_init.c(35): lrs_create_socket(relay-bgw, TCP, ...)
+vuser_init.c(35): callSocket: name: 45516860, socket type: 1
+vuser_init.c(35): callConnect: socket: relay-bgw (884), remote host: 192.168.1.99  remote port: 12200
+vuser_init.c(35): callConnect: getting host address from the host name (192.168.1.99).
+vuser_init.c(35): callConnect: Thu Feb 18 10:58:34.952: Waiting for writable socket 10 secs, 0 usecs
+vuser_init.c(36): lrs_create_socket(relay-fgw, TCP, ...)
+vuser_init.c(36): callSocket: name: 45524524, socket type: 1
+vuser_init.c(36): callConnect: socket: relay-fgw (896), remote host: 192.168.1.99  remote port: 12200
+vuser_init.c(36): callConnect: getting host address from the host name (192.168.1.99).
+vuser_init.c(36): callConnect: Thu Feb 18 10:58:34.952: Waiting for writable socket 10 secs, 0 usecs
+vuser_init.c(230): des is 3080070, index is 8, *size is 8
+vuser_init.c(232): [0] is 0
+vuser_init.c(232): [1] is 2
+vuser_init.c(232): [2] is 0
+vuser_init.c(232): [3] is 4
+vuser_init.c(232): [4] is 1
+vuser_init.c(232): [5] is 0
+vuser_init.c(232): [6] is 0
+vuser_init.c(232): [7] is a
+vuser_init.c(235): lrs_save_param_ex(relay-bgw, user, buf_p, 0, 8, ascii, bgw_RelayRegiRequest)
+vuser_init.c(235): callSaveParam: whence: user, offset: 0, length: 8
+vuser_init.c(235): Notify: Saving Parameter "bgw_RelayRegiRequest = \x00\x02\x00\x04\x01\x00\x00\n".
+vuser_init.c(42): lrs_send(relay-bgw, bgw_RelayRegiRequest)
+vuser_init.c(42): callSend: socket: relay-bgw (884), buffer: bgw_RelayRegiRequest
+vuser_init.c(42): callSend: Thu Feb 18 10:58:35.061: reading buffer bgw_RelayRegiRequest
+vuser_init.c(42): callSend: Thu Feb 18 10:58:35.061: calling parameterization routines
+vuser_init.c(42): Notify: Parameter Substitution: parameter "bgw_RelayRegiRequest" =  "\x00\x02\x00\x04\x01\x00\x00\n"
+vuser_init.c(42): callSend: Thu Feb 18 10:58:35.061: translate buffer to binary
+vuser_init.c(42): callSend: Thu Feb 18 10:58:35.077: Translate data for printing
+=================================SENT BUFFER=================================
+	"\x00\x02\x00\x04\x01\x00\x00"
+	"\n"
+===============================================================================
+vuser_init.c(42): callSend: Thu Feb 18 10:58:35.077: About to send 8 bytes to relay-bgw (884)
+vuser_init.c(42): callSend: Thu Feb 18 10:58:35.077: Waiting for writable socket 10 secs, 0 usecs
+vuser_init.c(42): callSend: Thu Feb 18 10:58:35.077: Trying to send 8 bytes
+vuser_init.c(42): callSend: Thu Feb 18 10:58:35.093: Sent in this iteration 8 bytes (total in all iterations 8 bytes)
+vuser_init.c(43): lrs_receive(relay-bgw, buf1)
+vuser_init.c(43): fiInitRecv: socket: relay-bgw (884), buffer: buf1, expected size: 12
+vuser_init.c(43): callRecv: Thu Feb 18 10:58:36.419: About to read 12 bytes from relay-bgw (884)
+vuser_init.c(43): fiPerformReceive: Thu Feb 18 10:58:36.419: Waiting for readable socket 10 secs, 0 usecs
+vuser_init.c(43): fiPerformReceive: Thu Feb 18 10:58:36.419: Trying to read 8192 bytes
+vuser_init.c(43): fiPerformReceive: Thu Feb 18 10:58:36.434: store received data , 12 bytes
+vuser_init.c(43): getAsciiReceivedBuffer: Thu Feb 18 10:58:36.434: Translate data for printing
+vuser_init.c(43): getAsciiReceivedBuffer: Thu Feb 18 10:58:36.434: Binary to ascii
+================================RECEIVED BUFFER================================
+	"\x00\x03\x00"
+	"\b"
+	"\x01\x00\x00"
+	"\n"
+	"\x00\x00\x00\x00"
+===============================================================================
+vuser_init.c(43): callRecv:12 bytes were received
+vuser_init.c(230): des is 3080070, index is 12, *size is 12
+vuser_init.c(232): [0] is 0
+vuser_init.c(232): [1] is 0
+vuser_init.c(232): [2] is 0
+vuser_init.c(232): [3] is 8
+vuser_init.c(232): [4] is a
+vuser_init.c(232): [5] is 0
+vuser_init.c(232): [6] is ffffffa8
+vuser_init.c(232): [7] is ffffffc0
+vuser_init.c(232): [8] is 1
+vuser_init.c(232): [9] is 0
+vuser_init.c(232): [10] is 0
+vuser_init.c(232): [11] is a
+vuser_init.c(235): lrs_save_param_ex(relay-bgw, user, buf_p, 0, 12, ascii, fgw_RelayQueryConnectionRe)
+vuser_init.c(235): callSaveParam: whence: user, offset: 0, length: 12
+vuser_init.c(235): Notify: Saving Parameter "fgw_RelayQueryConnectionRe = \x00\x00\x00\b\n\x00¨À\x01\x00\x00\n".
+vuser_init.c(49): lrs_send(relay-fgw, fgw_RelayQueryConnectionRe)
+vuser_init.c(49): callSend: socket: relay-fgw (896), buffer: fgw_RelayQueryConnectionRe
+vuser_init.c(49): callSend: Thu Feb 18 10:58:36.637: reading buffer fgw_RelayQueryConnectionRe
+vuser_init.c(49): callSend: Thu Feb 18 10:58:36.637: calling parameterization routines
+vuser_init.c(49): Notify: Parameter Substitution: parameter "fgw_RelayQueryConnectionRe" =  "\x00\x00\x00\b\n\x00¨À\x01\x00\x00\n"
+vuser_init.c(49): callSend: Thu Feb 18 10:58:36.637: translate buffer to binary
+vuser_init.c(49): callSend: Thu Feb 18 10:58:36.653: Translate data for printing
+=================================SENT BUFFER=================================
+	"\x00\x00\x00"
+	"\b\n"
+	"\x00"
+	"¨À"
+	"\x01\x00\x00"
+	"\n"
+===============================================================================
+vuser_init.c(49): callSend: Thu Feb 18 10:58:36.653: About to send 12 bytes to relay-fgw (896)
+vuser_init.c(49): callSend: Thu Feb 18 10:58:36.653: Waiting for writable socket 10 secs, 0 usecs
+vuser_init.c(49): callSend: Thu Feb 18 10:58:36.668: Trying to send 12 bytes
+vuser_init.c(49): callSend: Thu Feb 18 10:58:36.668: Sent in this iteration 12 bytes (total in all iterations 12 bytes)
+vuser_init.c(50): lrs_receive(relay-fgw, buf2)
+vuser_init.c(50): fiInitRecv: socket: relay-fgw (896), buffer: buf2, expected size: 20
+vuser_init.c(50): callRecv: Thu Feb 18 10:58:37.216: About to read 20 bytes from relay-fgw (896)
+vuser_init.c(50): fiPerformReceive: Thu Feb 18 10:58:37.216: Waiting for readable socket 10 secs, 0 usecs
+vuser_init.c(50): fiPerformReceive: Thu Feb 18 10:58:37.232: Trying to read 8192 bytes
+vuser_init.c(50): fiPerformReceive: Thu Feb 18 10:58:37.232: store received data , 28 bytes
+vuser_init.c(50): fiPerformReceive: Thu Feb 18 10:58:37.232: Waiting for readable socket 10 secs, 0 usecs
+vuser_init.c(50): fiPerformReceive: Thu Feb 18 10:58:47.253: Select timed out
+vuser_init.c(50): Mismatch in buffer's length (expected 20 bytes, 28 bytes actually received, difference in 8 bytes)
+vuser_init.c(50): fiCheckRecvMismatch: Thu Feb 18 10:58:47.253: reading buffer buf2
+vuser_init.c(50): fiCheckRecvMismatch: Thu Feb 18 10:58:47.269: calling parameterization routines
+================================EXPECTED BUFFER================================
+===============================================================================
+vuser_init.c(50): getAsciiReceivedBuffer: Thu Feb 18 10:58:47.300: Translate data for printing
+vuser_init.c(50): getAsciiReceivedBuffer: Thu Feb 18 10:58:47.300: Binary to ascii
+================================RECEIVED BUFFER================================
+	"\x00\x01\x00\x18"
+	"\n"
+	"\x00"
+	"¨À"
+	"\x01\x00\x00"
+	"\n"
+	"\x00\x00\x00\x00\x00\x00\x00"
+	"\b"
+	"\xff\xff\xff\xff\xff\xff\xff\xff"
+===============================================================================
+vuser_init.c(50): callRecv:28 bytes were received
+vuser_init.c(230): des is 3080070, index is 8, *size is 8
+vuser_init.c(232): [0] is 0
+vuser_init.c(232): [1] is 2
+vuser_init.c(232): [2] is 0
+vuser_init.c(232): [3] is 4
+vuser_init.c(232): [4] is a
+vuser_init.c(232): [5] is 0
+vuser_init.c(232): [6] is ffffffa8
+vuser_init.c(232): [7] is ffffffc0
+vuser_init.c(235): lrs_save_param_ex(relay-bgw, user, buf_p, 0, 8, ascii, fgw_RelayRegiRequest)
+vuser_init.c(235): callSaveParam: whence: user, offset: 0, length: 8
+vuser_init.c(235): Notify: Saving Parameter "fgw_RelayRegiRequest = \x00\x02\x00\x04\n\x00¨À".
+vuser_init.c(54): lrs_send(relay-fgw, fgw_RelayRegisterRequest)
+vuser_init.c(54): Error : Specified buffer fgw_RelayRegisterRequest doesn't exist. Error code : 9011.
+Abort was called from an action.

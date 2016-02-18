@@ -1,0 +1,2 @@
+update_user_profile
+{"ver":"s.t.0.1"",""type":"data"",""ch":{"ds":1",""app":0}",""data":{"type":"update_user_profile"",""method":"req"",""profile":{"nickname":"updatenewnickname"",""first_name":"updateuserprofile"",""last_name":"updateuserprofile"",""job_role":"updatejobrole"",""phone_number":"update123456"}}}
