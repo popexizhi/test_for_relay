@@ -15,8 +15,8 @@ do
         [5] = "RelayMsgConnectionResponse",
         [6] = "RelayDataIndication",
         [7] = "RelayDeregisterRequest",
-        [8] = "RelayDeregisterResponse",
-        [9] = "RelayEchoRequest",
+        [8] = "ProvisionAddHostRequest",        --NOC_RELAY_MSG_ADD_HOST_REQ de-registration request from provision server to relay        
+        [9] = "ProvisionAddHostResponse",       --NOC_RELAY_MSG_ADD_HOST_RESP de-registration response, from relay to provision server
         [10] = "RelayEchoResponse",
         [11] = "Reserved_1",
         [12] = "Reserved_2",
@@ -47,6 +47,12 @@ do
 	local f_noc_connection_id = ProtoField.uint64("NOC.ConnectionID", "Connection ID", base.HEX)
 	-- result (4 bytes)
 	local f_noc_result = ProtoField.uint32("NOC.Result", "Result", base.DEC)
+    -- add_host host_type(1 bytes) 
+    local f_noc_host_type = ProtoField.uint32("NOC.HostType", "HostType", base.DEC)
+    -- add_host data_type(1 bytes) 
+    local f_noc_data_type = ProtoField.uint32("NOC.DataType", "DataType", base.DEC)
+    -- add_host host_key_len(1 bytes) 
+    local f_noc_host_key_len = ProtoField.uint32("NOC.HostKeyLen", "HostKeyLen", base.DEC)
 
 	-- define the fields table of this dissector(as a protoField array)
 	PROTO_NOC.fields = {f_noc_version, f_noc_msg_type, f_noc_length, f_noc_target_host_id, 
@@ -130,10 +136,19 @@ do
         	pkt.cols.info = "RelayDataIndication (QUIC over NOC-Relay)"
 		elseif msg_type == 7 then -- RelayDeregisterRequest
 			pkt.cols.info = "RelayDeregisterRequest"
-		elseif msg_type == 8 then -- RelayDeregisterResponse
-			pkt.cols.info = "RelayDeregisterResponse"
-		elseif msg_type == 9 then -- RelayEchoRequest
-			pkt.cols.info = "RelayEchoRequest"
+
+		elseif msg_type == 8 then -- ProvisionAddHostRequest
+        	t:add(f_noc_host_id, buf(4,4))
+            --t:add(f_noc_host_type, buf(8,1))
+            --t:add(f_noc_data_type, buf(9,1))
+            --t:add(f_noc_host_key_len, buf(10,1))
+
+			pkt.cols.info = "ProvisionAddHostRequest"
+		elseif msg_type == 9 then -- ProvisionAddHostResponse 
+            t:add(f_noc_host_id, buf(4,4))
+            t:add(f_noc_result, buf(8,4))
+			pkt.cols.info = "ProvisionAddHostResponse"
+
 		elseif msg_type == 10 then -- RelayEchoResponse
 			pkt.cols.info = "RelayEchoResponse"
 

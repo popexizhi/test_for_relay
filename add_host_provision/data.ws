@@ -2,6 +2,6 @@
 
 send add_host "<add_host>"
 
-recv buf2 10
+recv buf2 8
 
 -1

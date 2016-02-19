@@ -12,8 +12,8 @@
 #define RelayMsgConnectionResponse  5
 #define RelayDataIndication 		6
 
-char fgw_host_id[] = {0x01,0x00,0x01,0x1a};//{0x01,0x00,0x00,0x0a}; 
-char bgw_host_id[] = {0x00,0x00,0x00,0x02};//{0x0a,0x00,0xa8,0xc0};
+char fgw_host_id[] = {0x01,0x00,0x00,0x0a};//{0x01,0x00,0x00,0x0a}; 
+char bgw_host_id[] = {0x0a,0x00,0xa8,0xc0};//{0x0a,0x00,0xa8,0xc0};
 
 vuser_init()
 {
@@ -30,8 +30,8 @@ vuser_init()
 	char fgw_RelayDataIndication[] = {0x00,0x06,0x00,0x0a,0x01,0x00,0x00,0x0a,0x0a,0x00,0xa8,0xc0,0x11,0x11}; //data  0100000a -> 0a00a8c0
 */
 	
-    lrs_create_socket("relay-bgw", "TCP", "RemoteHost=192.168.1.99:12200",  LrsLastArg);
-	lrs_create_socket("relay-fgw", "TCP", "RemoteHost=192.168.1.99:12200",  LrsLastArg);
+    lrs_create_socket("relay-bgw", "TCP", "RemoteHost=192.168.1.99:13200",  LrsLastArg);
+	lrs_create_socket("relay-fgw", "TCP", "RemoteHost=192.168.1.99:13200",  LrsLastArg);
 	
 
 	//-------------------------------------L1-------------------------------------------------
@@ -42,7 +42,7 @@ vuser_init()
 	res = Noc_get_receive("relay-bgw", "buf1", RelayRegisterRequest);
 	if (0 != res ) {
 		lr_error_message("bgw_RelayRegiRequest is err");
-		return res;
+		return res ;
 	}
 
 	
@@ -65,7 +65,7 @@ vuser_init()
 		lr_error_message("fgw_RelayRegiRequest is err");
 		return res;
 	}
-
+	
 	//-------------------------------------L2-------------------------------------------------
 	//fgw_RelayMsgConnectionRequest
 	// L2  0100000a -> 0a00a8c0 fgw_host_id ->bgw_host_id

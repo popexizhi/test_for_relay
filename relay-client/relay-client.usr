@@ -60,5 +60,3 @@ Default Profile=default.usp
 CurrentState=1
 VuserStateHistory= 0 65536 65537 65552
 LastReplayStatus=2
-LastReplayErrorID1=-17999
-LastReplayErrorMsg1=vuser_init.c(44): Error: bgw_RelayRegiRequest is err

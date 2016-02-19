@@ -17,34 +17,40 @@ vuser_init()
 	char add_host_device[] ={ 
 							   0x00,
 							   0x08, 				//msg_type :add_host 0x08
-							   0x00,0x16,			//data_length :
-							   0x01,0x00,0x01,0x1a, //host_id :0100011a
+							   0x00,0x28,			//data_length :
+							   0x01,0x00,0x01,0x4a, //host_id :0100011a
 							   0x01,				//host_type :device
 							   0x01,				//data_type :host key
-							   0x02,				//host_key_len :0x02
-							   0x00,0x00,			//host_key	host_key_len * 8 : 
+							   0x14,				//host_key_len :0x14 = 20
+							   0x00,0x00,0x00,0x00,0x00,		//host_key	host_key_len * 8 : 
+							   0x00,0x00,0x00,0x00,0x00,
+							   0x00,0x00,0x00,0x00,0x00,
+							   0x00,0x00,0x00,0x00,0x01,
 							   0x02,				// data_type:字段数据类型
 							   0x00,0x00,0x00,0x02,	// app_server_host_id_num:允许访问的应用主机个数
-							   0x01,0x00,0x01,0x1b,	// app_server_host_id_list: 01 00 01 1b  and 01 00 01 1c
-							   0x01,0x00,0x01,0x1c,	// app_server_host_id_list:允许访问的应用主机ID列表
+							   0x01,0x00,0x01,0x4b,	// app_server_host_id_list: 01 00 01 1b  and 01 00 01 1c
+							   0x01,0x00,0x01,0x4c,	// app_server_host_id_list:允许访问的应用主机ID列表
 	}; //00成功，03重复注册
 	char add_host_app_server[] = {
 							   0x00,
 							   0x08, 				//msg_type :add_host 0x08
-							   0x00,0x09,			//data_length :
-							   0x00,0x00,0x00,0x02, //host_id :0100011a
+							   0x00,0x1b,			//data_length :
+							   0x01,0x00,0x01,0x4c, //host_id :0100011a
 							   0x02,				//host_type :app_server
 							   0x01,				//data_type :host key
-							   0x02,				//host_key_len :0x02
-							   0x00,0x00,			//host_key	host_key_len * 8 :
+							   0x14,				//host_key_len :0x14 = 20
+							   0x00,0x00,0x00,0x00,0x00,		//host_key	host_key_len * 8 : 
+							   0x00,0x00,0x00,0x00,0x00,
+							   0x00,0x00,0x00,0x00,0x00,
+							   0x00,0x00,0x00,0x00,0x01,
 	};
-    lrs_create_socket("provision", "TCP", "RemoteHost=192.168.1.99:12201",  LrsLastArg);
-	//lrs_create_socket("relay-fgw", "TCP", "RemoteHost=192.168.1.99:12200",  LrsLastArg);
+    lrs_create_socket("provision", "TCP", "RemoteHost=192.168.1.99:13201",  LrsLastArg);
+	//lrs_create_socket("provision", "TCP", "RemoteHost=192.168.1.196:12201",  LrsLastArg);
 	
 
-	lrs_save_param_ex("provision", "user", add_host_device, 0, sizeof(add_host_device) ,"ascii", "add_host"); //存储发送字符串
-	lrs_send("provision", "add_host" , LrsLastArg);
-    lrs_receive("provision", "buf2", LrsLastArg);
+	//lrs_save_param_ex("provision", "user", add_host_device, 0, sizeof(add_host_device) ,"ascii", "add_host"); //存储发送字符串
+	//lrs_send("provision", "add_host" , LrsLastArg);
+    //lrs_receive("provision", "buf2", LrsLastArg);
 
 	lrs_save_param_ex("provision", "user", add_host_app_server, 0, sizeof(add_host_app_server) ,"ascii", "add_host"); //存储发送字符串
 	lrs_send("provision", "add_host" , LrsLastArg);

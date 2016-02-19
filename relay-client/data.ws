@@ -9,7 +9,7 @@ send bgw_RelayRegiRequest "<bgw_RelayRegiRequest>"
 
 send fgw_RelayRegiRequest "<fgw_RelayRegiRequest>"
 
-recv buf1 12
+recv buf1 8
 
 
 send bgw_RelayQueryConnectionR "<bgw_RelayQueryConnectionR>"

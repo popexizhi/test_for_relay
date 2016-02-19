@@ -7,9 +7,9 @@ BuildTarget=
 ParamRightBrace=>
 ParamLeftBrace=<
 NewFunctionHeader=0
-LastActiveAction=
+LastActiveAction=vuser_init
 CorrInfoReportDir=result1
-LastResultDir=
+LastResultDir=result1
 DevelopTool=Vugen
 MajorVersion=11
 MinorVersion=0
@@ -40,7 +40,7 @@ Default Profile=default.usp
 21=0
 CurrentState=1
 VuserStateHistory= 0 65536 65537 65552
-LastReplayStatus=1
+LastReplayStatus=2
 [ExtraFiles]
 data.ws=
 [Recorded Actions]
