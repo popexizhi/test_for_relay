@@ -12,8 +12,8 @@
 #define RelayMsgConnectionResponse  5
 #define RelayDataIndication 		6
 
-char fgw_host_id[] = {0x01,0x00,0x00,0x0a}; 
-char bgw_host_id[] = {0x0a,0x00,0xa8,0xc0};
+char fgw_host_id[] = {0x01,0x00,0x01,0x1a};//{0x01,0x00,0x00,0x0a}; 
+char bgw_host_id[] = {0x00,0x00,0x00,0x02};//{0x0a,0x00,0xa8,0xc0};
 
 vuser_init()
 {
@@ -32,7 +32,7 @@ vuser_init()
 	
     lrs_create_socket("relay-bgw", "TCP", "RemoteHost=192.168.1.99:12200",  LrsLastArg);
 	lrs_create_socket("relay-fgw", "TCP", "RemoteHost=192.168.1.99:12200",  LrsLastArg);
-
+	
 
 	//-------------------------------------L1-------------------------------------------------
 	//bgw_RelayRegiRequest

@@ -1,0 +1,6 @@
+Virtual User Script started at : 2016-02-18 19:16:56
+Starting action vuser_init.
+vuser_init.c(41): lrs_create_socket(provision, TCP, ...)
+vuser_init.c(45): lrs_save_param_ex(provision, user, buf_p, 0, 26, ascii, add_host)
+vuser_init.c(46): lrs_send(provision, add_host)
+Abort was called from an action.

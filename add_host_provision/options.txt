@@ -1,0 +1,9 @@
+-+
+-DCCI
+-D_IDA_XL
+-DWINNT
+-IG:\pc\work\relay\script\test_for_relay\add_host_provision
+-ID:\Program Files (x86)\HP\LoadRunner\include
+-eg:\pc\work\relay\script\test_for_relay\add_host_provision\\logfile.log
+g:\pc\work\relay\script\test_for_relay\add_host_provision\\combined_add_host_provision.c
+g:\pc\work\relay\script\test_for_relay\add_host_provision\\pre_cci.c

@@ -1,0 +1,22 @@
+Virtual User Script started at : 2016-02-18 19:09:53
+Starting action vuser_init.
+vuser_init.c(41): lrs_create_socket(provision, TCP, ...)
+vuser_init.c(45): lrs_save_param_ex(provision, user, buf_p, 0, 26, ascii, add_host)
+vuser_init.c(46): lrs_send(provision, add_host)
+vuser_init.c(47): lrs_receive(provision, buf2)
+vuser_init.c(47): Mismatch in buffer's length (expected 10 bytes, 12 bytes actually received, difference in 2 bytes)
+vuser_init.c(49): lrs_save_param_ex(provision, user, buf_p, 0, 13, ascii, add_host)
+vuser_init.c(50): lrs_send(provision, add_host)
+vuser_init.c(51): lrs_receive(provision, buf2)
+vuser_init.c(51): Mismatch in buffer's length (expected 10 bytes, 12 bytes actually received, difference in 2 bytes)
+Ending action vuser_init.
+Running Vuser...
+Starting iteration 1.
+Starting action Action.
+Ending action Action.
+Ending iteration 1.
+Ending Vuser...
+Starting action vuser_end.
+vuser_end.c(6): lrs_cleanup()
+Ending action vuser_end.
+Vuser Terminated.

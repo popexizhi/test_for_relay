@@ -1,4 +1,4 @@
-Virtual User Script started at : 2016-02-18 16:43:15
+Virtual User Script started at : 2016-02-18 19:15:28
 Starting action vuser_init.
 vuser_init.c(33): lrs_create_socket(relay-bgw, TCP, ...)
 vuser_init.c(34): lrs_create_socket(relay-fgw, TCP, ...)
@@ -7,12 +7,12 @@ noc_packet.c(301): lrs_save_param_ex(relay-bgw, user, buf_p, 0, 8, ascii, bgw_Re
 vuser_init.c(41): lrs_send(relay-bgw, bgw_RelayRegiRequest)
 noc_packet.c(31): lrs_receive_ex(relay-bgw, buf1)
 noc_packet.c(32): lrs_get_last_received_buffer(relay-bgw, buf_p, size_p)
-noc_packet.c(33): $$$$$$$$$$$$$$$$$$$$$$$$$$$$ len is 0 3 2ad0504 2b714ec
+noc_packet.c(33): $$$$$$$$$$$$$$$$$$$$$$$$$$$$ len is 0 3 24007dc 2b714ec
 noc_packet.c(36): msg_type_rec 为预期结果
 noc_packet.c(42): len is 2
 noc_packet.c(45): lrs_receive_ex(relay-bgw, buf1)
 noc_packet.c(46): lrs_get_last_received_buffer(relay-bgw, buf_p, size_p)
-noc_packet.c(47): $$$$$$$$$$$$$$$$$$$$$$$$$$$$ len is 0 8 2ad0504 2b714ec
+noc_packet.c(47): $$$$$$$$$$$$$$$$$$$$$$$$$$$$ len is 0 8 24007dc 2b714ec
 noc_packet.c(54): len is 8
 noc_packet.c(59): lrs_receive_ex(relay-bgw, buf1)
 noc_packet.c(60): lrs_get_last_received_buffer(relay-bgw, buf_p, size_p)
@@ -27,6 +27,36 @@ Running Vuser...
 Starting iteration 1.
 Starting action Action.
 -------------------------------------L2 : send data-----------------------------------------------
+noc_packet.c(301): lrs_save_param_ex(relay-bgw, user, buf_p, 0, 32, ascii, fgw_RelayDataIndication)
+Action.c(17): lrs_send(relay-fgw, fgw_RelayDataIndication)
+noc_packet.c(31): lrs_receive_ex(relay-bgw, buf_RelayDataIndication)
+noc_packet.c(31): Mismatch in buffer's length (expected 2 bytes, 0 bytes actually received, difference in 2 bytes)
+noc_packet.c(32): lrs_get_last_received_buffer(relay-bgw, buf_p, size_p)
+noc_packet.c(33): $$$$$$$$$$$$$$$$$$$$$$$$$$$$ len is ffffff8f ffffffe1 24007d8 2b714ec
+noc_packet.c(39): ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~非预期返回类型，继续等待，未处理
+noc_packet.c(42): len is 0
+noc_packet.c(45): lrs_receive_ex(relay-bgw, buf_RelayDataIndication)
+noc_packet.c(45): Mismatch in buffer's length (expected 2 bytes, 0 bytes actually received, difference in 2 bytes)
+noc_packet.c(46): lrs_get_last_received_buffer(relay-bgw, buf_p, size_p)
+noc_packet.c(47): $$$$$$$$$$$$$$$$$$$$$$$$$$$$ len is ffffffa9 ffffffe1 24007d8 2b714ec
+noc_packet.c(54): len is 0
+noc_packet.c(59): lrs_receive_ex(relay-bgw, buf_RelayDataIndication)
+noc_packet.c(60): lrs_get_last_received_buffer(relay-bgw, buf_p, size_p)
+noc_packet.c(301): lrs_save_param_ex(relay-bgw, user, buf_p, 0, 32, ascii, fgw_RelayDataIndication)
+Action.c(17): lrs_send(relay-fgw, fgw_RelayDataIndication)
+noc_packet.c(31): lrs_receive_ex(relay-bgw, buf_RelayDataIndication)
+noc_packet.c(31): Mismatch in buffer's length (expected 2 bytes, 0 bytes actually received, difference in 2 bytes)
+noc_packet.c(32): lrs_get_last_received_buffer(relay-bgw, buf_p, size_p)
+noc_packet.c(33): $$$$$$$$$$$$$$$$$$$$$$$$$$$$ len is ffffffaa ffffffe1 24007d8 2b714ec
+noc_packet.c(39): ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~非预期返回类型，继续等待，未处理
+noc_packet.c(42): len is 0
+noc_packet.c(45): lrs_receive_ex(relay-bgw, buf_RelayDataIndication)
+noc_packet.c(45): Mismatch in buffer's length (expected 2 bytes, 0 bytes actually received, difference in 2 bytes)
+noc_packet.c(46): lrs_get_last_received_buffer(relay-bgw, buf_p, size_p)
+noc_packet.c(47): $$$$$$$$$$$$$$$$$$$$$$$$$$$$ len is ffffffa0 ffffffe1 24007d8 2b714ec
+noc_packet.c(54): len is 0
+noc_packet.c(59): lrs_receive_ex(relay-bgw, buf_RelayDataIndication)
+noc_packet.c(60): lrs_get_last_received_buffer(relay-bgw, buf_p, size_p)
 noc_packet.c(301): lrs_save_param_ex(relay-bgw, user, buf_p, 0, 32, ascii, fgw_RelayDataIndication)
 Action.c(17): lrs_send(relay-fgw, fgw_RelayDataIndication)
 noc_packet.c(31): lrs_receive_ex(relay-bgw, buf_RelayDataIndication)

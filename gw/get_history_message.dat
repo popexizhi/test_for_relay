@@ -1,2 +1,0 @@
-get_history_message
-{"ver":"s.t.0.1"",""type":"data"",""ch":{"ds":1",""app":12}",""data":{"type":"get_history_messages"",""method":"req"",""target":"user"",""target_type":"user"",""target":21",""last_msg_id":438000",""count":20}}
