@@ -161,5 +161,6 @@ do
 	local tcp_encap_table = DissectorTable.get("tcp.port")
 	tcp_encap_table:add(12200, PROTO_NOC) -- Xgw
     tcp_encap_table:add(12201, PROTO_NOC) -- Provision
-
+	tcp_encap_table:add(13200, PROTO_NOC) -- Xgw_test
+    tcp_encap_table:add(13201, PROTO_NOC) -- Provision_test
 end
