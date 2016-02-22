@@ -18,7 +18,7 @@ vuser_init()
 							   0x00,
 							   0x08, 				//msg_type :add_host 0x08
 							   0x00,0x28,			//data_length :
-							   0x01,0x00,0x01,0x4a, //host_id :0100011a
+							   0x01,0x00,0x01,0x5a, //host_id :0100011a
 							   0x01,				//host_type :device
 							   0x01,				//data_type :host key
 							   0x14,				//host_key_len :0x14 = 20
@@ -35,7 +35,7 @@ vuser_init()
 							   0x00,
 							   0x08, 				//msg_type :add_host 0x08
 							   0x00,0x1b,			//data_length :
-							   0x01,0x00,0x01,0x4c, //host_id :0100011a
+							   0x01,0x00,0x01,0x5c, //host_id :0100011a
 							   0x02,				//host_type :app_server
 							   0x01,				//data_type :host key
 							   0x14,				//host_key_len :0x14 = 20

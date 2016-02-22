@@ -1,20 +1,20 @@
-Virtual User Script started at : 2016-02-19 15:35:37
+Virtual User Script started at : 2016-02-19 15:39:03
 Starting action vuser_init.
 vuser_init.c(47): lrs_create_socket(provision, TCP, ...)
-vuser_init.c(47): callSocket: name: 46766268, socket type: 1
+vuser_init.c(47): callSocket: name: 44406972, socket type: 1
 vuser_init.c(47): callConnect: socket: provision (848), remote host: 192.168.1.99  remote port: 13201
 vuser_init.c(47): callConnect: getting host address from the host name (192.168.1.99).
-vuser_init.c(47): callConnect: Fri Feb 19 15:35:37.453: Waiting for writable socket 10 secs, 0 usecs
+vuser_init.c(47): callConnect: Fri Feb 19 15:39:03.164: Waiting for writable socket 10 secs, 0 usecs
 vuser_init.c(55): lrs_save_param_ex(provision, user, buf_p, 0, 31, ascii, add_host)
 vuser_init.c(55): callSaveParam: whence: user, offset: 0, length: 31
 vuser_init.c(55): Notify: Saving Parameter "add_host = \x00\b\x00\x1b\x01\x00\x01L\x02\x01\x14\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01".
 vuser_init.c(56): lrs_send(provision, add_host)
 vuser_init.c(56): callSend: socket: provision (848), buffer: add_host
-vuser_init.c(56): callSend: Fri Feb 19 15:35:38.032: reading buffer add_host
-vuser_init.c(56): callSend: Fri Feb 19 15:35:38.032: calling parameterization routines
+vuser_init.c(56): callSend: Fri Feb 19 15:39:03.977: reading buffer add_host
+vuser_init.c(56): callSend: Fri Feb 19 15:39:03.977: calling parameterization routines
 vuser_init.c(56): Notify: Parameter Substitution: parameter "add_host" =  "\x00\b\x00\x1b\x01\x00\x01L\x02\x01\x14\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01"
-vuser_init.c(56): callSend: Fri Feb 19 15:35:38.032: translate buffer to binary
-vuser_init.c(56): callSend: Fri Feb 19 15:35:38.032: Translate data for printing
+vuser_init.c(56): callSend: Fri Feb 19 15:39:03.977: translate buffer to binary
+vuser_init.c(56): callSend: Fri Feb 19 15:39:03.992: Translate data for printing
 =================================SENT BUFFER=================================
 	"\x00"
 	"\b"
@@ -23,25 +23,25 @@ vuser_init.c(56): callSend: Fri Feb 19 15:35:38.032: Translate data for printing
 	"\x02\x01\x14\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
 	"\x00\x00\x00\x01"
 ===============================================================================
-vuser_init.c(56): callSend: Fri Feb 19 15:35:38.063: About to send 31 bytes to provision (848)
-vuser_init.c(56): callSend: Fri Feb 19 15:35:38.079: Waiting for writable socket 10 secs, 0 usecs
-vuser_init.c(56): callSend: Fri Feb 19 15:35:38.079: Trying to send 31 bytes
-vuser_init.c(56): callSend: Fri Feb 19 15:35:38.094: Sent in this iteration 31 bytes (total in all iterations 31 bytes)
+vuser_init.c(56): callSend: Fri Feb 19 15:39:03.992: About to send 31 bytes to provision (848)
+vuser_init.c(56): callSend: Fri Feb 19 15:39:03.992: Waiting for writable socket 10 secs, 0 usecs
+vuser_init.c(56): callSend: Fri Feb 19 15:39:04.008: Trying to send 31 bytes
+vuser_init.c(56): callSend: Fri Feb 19 15:39:04.024: Sent in this iteration 31 bytes (total in all iterations 31 bytes)
 vuser_init.c(57): lrs_receive(provision, buf2)
 vuser_init.c(57): fiInitRecv: socket: provision (848), buffer: buf2, expected size: 8
-vuser_init.c(57): callRecv: Fri Feb 19 15:35:38.110: About to read 8 bytes from provision (848)
-vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:35:38.126: Waiting for readable socket 10 secs, 0 usecs
-vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:35:38.126: Trying to read 8192 bytes
-vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:35:38.126: store received data , 12 bytes
-vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:35:38.126: Waiting for readable socket 10 secs, 0 usecs
-vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:35:48.150: Select timed out
+vuser_init.c(57): callRecv: Fri Feb 19 15:39:04.039: About to read 8 bytes from provision (848)
+vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:39:04.039: Waiting for readable socket 10 secs, 0 usecs
+vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:39:04.039: Trying to read 8192 bytes
+vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:39:04.055: store received data , 12 bytes
+vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:39:04.055: Waiting for readable socket 10 secs, 0 usecs
+vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:39:14.067: Select timed out
 vuser_init.c(57): Mismatch in buffer's length (expected 8 bytes, 12 bytes actually received, difference in 4 bytes)
-vuser_init.c(57): fiCheckRecvMismatch: Fri Feb 19 15:35:48.181: reading buffer buf2
-vuser_init.c(57): fiCheckRecvMismatch: Fri Feb 19 15:35:48.212: calling parameterization routines
+vuser_init.c(57): fiCheckRecvMismatch: Fri Feb 19 15:39:14.099: reading buffer buf2
+vuser_init.c(57): fiCheckRecvMismatch: Fri Feb 19 15:39:14.099: calling parameterization routines
 ================================EXPECTED BUFFER================================
 ===============================================================================
-vuser_init.c(57): getAsciiReceivedBuffer: Fri Feb 19 15:35:48.228: Translate data for printing
-vuser_init.c(57): getAsciiReceivedBuffer: Fri Feb 19 15:35:48.228: Binary to ascii
+vuser_init.c(57): getAsciiReceivedBuffer: Fri Feb 19 15:39:14.114: Translate data for printing
+vuser_init.c(57): getAsciiReceivedBuffer: Fri Feb 19 15:39:14.130: Binary to ascii
 ================================RECEIVED BUFFER================================
 	"\x00"
 	"\t"
