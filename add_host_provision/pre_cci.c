@@ -1138,7 +1138,19 @@ int		LrsExcludeSocket(char* s_desc);
 
 vuser_init()
 {
-    int length ,i ,res = 0 ;
+
+    return 0;
+}
+
+# 2 "g:\\pc\\work\\relay\\script\\test_for_relay\\add_host_provision\\\\combined_add_host_provision.c" 2
+
+# 1 "Action.c" 1
+
+
+
+Action()
+{
+	    int length ,i ,res = 0 ;
 	char *null;
 	char *data;
  
@@ -1190,17 +1202,6 @@ vuser_init()
 	LrsSaveParamEx("provision", "user", add_host_app_server, 0, sizeof(add_host_app_server) ,"ascii", "add_host");  
 	LrsSend("provision", "add_host" , "0");
     LrsReceive("provision", "buf2", "0");
-    return 0;
-}
-
-# 2 "g:\\pc\\work\\relay\\script\\test_for_relay\\add_host_provision\\\\combined_add_host_provision.c" 2
-
-# 1 "Action.c" 1
-
-
-
-Action()
-{
     return 0;
 }
 

@@ -1,12 +1,4 @@
-[vuser_init:56]
-Enable=1
-BreakOnIter=0
-BreakOnValue=0
-IterCond=""
-IterValue=""
-ParamName=""
-ParamValue=""
-[vuser_init:58]
+[vuser_init:7]
 Enable=1
 BreakOnIter=0
 BreakOnValue=0

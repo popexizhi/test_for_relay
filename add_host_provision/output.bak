@@ -1,55 +1,66 @@
-Virtual User Script started at : 2016-02-19 15:39:03
+Virtual User Script started at : 2016-02-22 12:58:26
 Starting action vuser_init.
-vuser_init.c(47): lrs_create_socket(provision, TCP, ...)
-vuser_init.c(47): callSocket: name: 44406972, socket type: 1
-vuser_init.c(47): callConnect: socket: provision (848), remote host: 192.168.1.99  remote port: 13201
-vuser_init.c(47): callConnect: getting host address from the host name (192.168.1.99).
-vuser_init.c(47): callConnect: Fri Feb 19 15:39:03.164: Waiting for writable socket 10 secs, 0 usecs
-vuser_init.c(55): lrs_save_param_ex(provision, user, buf_p, 0, 31, ascii, add_host)
-vuser_init.c(55): callSaveParam: whence: user, offset: 0, length: 31
-vuser_init.c(55): Notify: Saving Parameter "add_host = \x00\b\x00\x1b\x01\x00\x01L\x02\x01\x14\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01".
-vuser_init.c(56): lrs_send(provision, add_host)
-vuser_init.c(56): callSend: socket: provision (848), buffer: add_host
-vuser_init.c(56): callSend: Fri Feb 19 15:39:03.977: reading buffer add_host
-vuser_init.c(56): callSend: Fri Feb 19 15:39:03.977: calling parameterization routines
-vuser_init.c(56): Notify: Parameter Substitution: parameter "add_host" =  "\x00\b\x00\x1b\x01\x00\x01L\x02\x01\x14\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01"
-vuser_init.c(56): callSend: Fri Feb 19 15:39:03.977: translate buffer to binary
-vuser_init.c(56): callSend: Fri Feb 19 15:39:03.992: Translate data for printing
+Ending action vuser_init.
+Running Vuser...
+Starting iteration 1.
+Starting action Action.
+Action.c(47): lrs_create_socket(provision, TCP, ...)
+Action.c(47): callSocket: name: 46110884, socket type: 1
+Action.c(47): callConnect: socket: provision (848), remote host: 192.168.1.99  remote port: 13201
+Action.c(47): callConnect: getting host address from the host name (192.168.1.99).
+Action.c(47): callConnect: Mon Feb 22 12:58:27.269: Waiting for writable socket 10 secs, 0 usecs
+Action.c(55): lrs_save_param_ex(provision, user, buf_p, 0, 31, ascii, add_host)
+Action.c(55): callSaveParam: whence: user, offset: 0, length: 31
+Action.c(55): Notify: Saving Parameter "add_host = \x00\b\x00\x1b\x01\x00\x01\\\x02\x01\x14\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01".
+Action.c(56): lrs_send(provision, add_host)
+Action.c(56): callSend: socket: provision (848), buffer: add_host
+Action.c(56): callSend: Mon Feb 22 12:58:27.279: reading buffer add_host
+Action.c(56): callSend: Mon Feb 22 12:58:27.279: calling parameterization routines
+Action.c(56): Notify: Parameter Substitution: parameter "add_host" =  "\x00\b\x00\x1b\x01\x00\x01\\\x02\x01\x14\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01"
+Action.c(56): callSend: Mon Feb 22 12:58:27.289: translate buffer to binary
+Action.c(56): callSend: Mon Feb 22 12:58:27.289: Translate data for printing
 =================================SENT BUFFER=================================
 	"\x00"
 	"\b"
 	"\x00\x1b\x01\x00\x01"
-	"L"
+	"\\"
 	"\x02\x01\x14\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
 	"\x00\x00\x00\x01"
 ===============================================================================
-vuser_init.c(56): callSend: Fri Feb 19 15:39:03.992: About to send 31 bytes to provision (848)
-vuser_init.c(56): callSend: Fri Feb 19 15:39:03.992: Waiting for writable socket 10 secs, 0 usecs
-vuser_init.c(56): callSend: Fri Feb 19 15:39:04.008: Trying to send 31 bytes
-vuser_init.c(56): callSend: Fri Feb 19 15:39:04.024: Sent in this iteration 31 bytes (total in all iterations 31 bytes)
-vuser_init.c(57): lrs_receive(provision, buf2)
-vuser_init.c(57): fiInitRecv: socket: provision (848), buffer: buf2, expected size: 8
-vuser_init.c(57): callRecv: Fri Feb 19 15:39:04.039: About to read 8 bytes from provision (848)
-vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:39:04.039: Waiting for readable socket 10 secs, 0 usecs
-vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:39:04.039: Trying to read 8192 bytes
-vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:39:04.055: store received data , 12 bytes
-vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:39:04.055: Waiting for readable socket 10 secs, 0 usecs
-vuser_init.c(57): fiPerformReceive: Fri Feb 19 15:39:14.067: Select timed out
-vuser_init.c(57): Mismatch in buffer's length (expected 8 bytes, 12 bytes actually received, difference in 4 bytes)
-vuser_init.c(57): fiCheckRecvMismatch: Fri Feb 19 15:39:14.099: reading buffer buf2
-vuser_init.c(57): fiCheckRecvMismatch: Fri Feb 19 15:39:14.099: calling parameterization routines
+Action.c(56): callSend: Mon Feb 22 12:58:27.299: About to send 31 bytes to provision (848)
+Action.c(56): callSend: Mon Feb 22 12:58:27.299: Waiting for writable socket 10 secs, 0 usecs
+Action.c(56): callSend: Mon Feb 22 12:58:27.299: Trying to send 31 bytes
+Action.c(56): callSend: Mon Feb 22 12:58:27.309: Sent in this iteration 31 bytes (total in all iterations 31 bytes)
+Action.c(57): lrs_receive(provision, buf2)
+Action.c(57): fiInitRecv: socket: provision (848), buffer: buf2, expected size: 8
+Action.c(57): callRecv: Mon Feb 22 12:58:27.319: About to read 8 bytes from provision (848)
+Action.c(57): fiPerformReceive: Mon Feb 22 12:58:27.319: Waiting for readable socket 10 secs, 0 usecs
+Action.c(57): fiPerformReceive: Mon Feb 22 12:58:27.329: Trying to read 8192 bytes
+Action.c(57): fiPerformReceive: Mon Feb 22 12:58:27.329: store received data , 12 bytes
+Action.c(57): fiPerformReceive: Mon Feb 22 12:58:27.339: Waiting for readable socket 10 secs, 0 usecs
+Action.c(57): fiPerformReceive: Mon Feb 22 12:58:37.348: Select timed out
+Action.c(57): Mismatch in buffer's length (expected 8 bytes, 12 bytes actually received, difference in 4 bytes)
+Action.c(57): fiCheckRecvMismatch: Mon Feb 22 12:58:37.368: reading buffer buf2
+Action.c(57): fiCheckRecvMismatch: Mon Feb 22 12:58:37.378: calling parameterization routines
 ================================EXPECTED BUFFER================================
 ===============================================================================
-vuser_init.c(57): getAsciiReceivedBuffer: Fri Feb 19 15:39:14.114: Translate data for printing
-vuser_init.c(57): getAsciiReceivedBuffer: Fri Feb 19 15:39:14.130: Binary to ascii
+Action.c(57): getAsciiReceivedBuffer: Mon Feb 22 12:58:37.398: Translate data for printing
+Action.c(57): getAsciiReceivedBuffer: Mon Feb 22 12:58:37.408: Binary to ascii
 ================================RECEIVED BUFFER================================
 	"\x00"
 	"\t"
 	"\x00"
 	"\b"
 	"\x01\x00\x01"
-	"L"
+	"\\"
 	"\x00\x00\x00\x03"
 ===============================================================================
-vuser_init.c(57): callRecv:12 bytes were received
-Abort was called from an action.
+Action.c(57): callRecv:12 bytes were received
+Ending action Action.
+Ending iteration 1.
+Ending Vuser...
+Starting action vuser_end.
+vuser_end.c(6): lrs_cleanup()
+vuser_end.c(6): callCloseSocket: socket: provision (848)
+Ending action vuser_end.
+Vuser Terminated.

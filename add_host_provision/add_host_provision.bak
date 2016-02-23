@@ -40,7 +40,7 @@ Default Profile=default.usp
 21=0
 CurrentState=1
 VuserStateHistory= 0 65536 65537 65552
-LastReplayStatus=2
+LastReplayStatus=1
 [ExtraFiles]
 data.ws=
 [Recorded Actions]
