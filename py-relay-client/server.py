@@ -43,12 +43,15 @@ def L2_RelayMsgConnectionResponse(gw):
     version , msg_type, length = struct.unpack('!2cH',rec)
     #print "version, msg_type, length" + repr(version) , repr(msg_type), length
     rec_data = gw.recv(length)
+    i = 0
     if('\x04' == msg_type):
         host_id , target_id = struct.unpack("!LL", rec_data)
         p_target_id = struct.pack("!L", target_id)
         print "*" * 20 + "msg_type : RelayMsgConnectionRes \t" + repr(p_target_id) + "*" * 20
         send_data = '\x00\x05\x00\x08' + p_target_id + '\x01\x00\x00\x0a' #\x0a\x00\xa8\xc1\x01\x00\x00\x0a' # target_id: \x0a\x00\xa8\xc0 host_id:\x01\x00\x00\x0a
         gw.send(send_data)
+        i = i+1
+        print i
     return msg_type, rec_data
 
 def get_rec(gw):
